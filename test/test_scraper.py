@@ -1,15 +1,10 @@
 from asynctest import mock, Mock, MagicMock
 from src.scraper import Scraper
 import pytest
+import requests
 
 
-def requests_get(url):
-    class Response:
-        text = 'content'
-    return Response()
-
-
-@mock.patch('src.scraper.requests.get', requests_get)
+@mock.patch('src.scraper.requests.get', new=MagicMock(return_value=type('', (object, ), {'text': 'content'})()))
 @pytest.mark.asyncio
 async def test_scraper_should_call_parser():
     url = "https://www.google.com"
@@ -19,4 +14,4 @@ async def test_scraper_should_call_parser():
     scraper = Scraper(parser)
 
     assert 'foo' == await scraper.get_contents(url)
-    parser.parse.assert_called_with('content')
+    requests.get.assert_called_with(url)
