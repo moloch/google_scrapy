@@ -1,4 +1,4 @@
-from asynctest import mock, CoroutineMock, MagicMock
+from asynctest import mock, Mock, MagicMock
 from src.scraper import Scraper
 import pytest
 
@@ -13,7 +13,7 @@ def requests_get(url):
 @pytest.mark.asyncio
 async def test_scraper_should_call_parser():
     url = "https://www.google.com"
-    parser = CoroutineMock()
+    parser = Mock()
     parser.parse = MagicMock(return_value='foo')
 
     scraper = Scraper(parser)
