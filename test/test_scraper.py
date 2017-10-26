@@ -1,6 +1,6 @@
-from unittest import mock
-from unittest.mock import Mock, MagicMock
+from asynctest import mock, CoroutineMock, MagicMock
 from src.scraper import Scraper
+import pytest
 
 
 def requests_get(url):
@@ -10,12 +10,13 @@ def requests_get(url):
 
 
 @mock.patch('src.scraper.requests.get', requests_get)
-def test_scraper_should_call_parser():
+@pytest.mark.asyncio
+async def test_scraper_should_call_parser():
     url = "https://www.google.com"
-    parser = Mock()
+    parser = CoroutineMock()
     parser.parse = MagicMock(return_value='foo')
 
     scraper = Scraper(parser)
 
-    assert 'foo' == scraper.get_contents(url)
+    assert 'foo' == await scraper.get_contents(url)
     parser.parse.assert_called_with('content')
