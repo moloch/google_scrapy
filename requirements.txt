@@ -17,7 +17,7 @@ pytest-mock==1.6.3
 pytest-watch==4.1.0
 PyYAML==3.12
 query-string==0.0.12
-requests==2.18.4
+requests==2.20.0
 setupfiles==0.0.50
 urllib3==1.22
 watchdog==0.8.3
