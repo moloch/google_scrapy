@@ -10,7 +10,7 @@ idna==2.6
 pathtools==0.1.2
 post==0.0.13
 public==0.0.38
-py==1.4.34
+py==1.10.0
 pytest==3.2.3
 pytest-asyncio==0.8.0
 pytest-mock==1.6.3
